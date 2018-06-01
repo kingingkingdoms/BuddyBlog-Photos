@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: BuddyBlog Photos
+ * Plugin Name: BuddyBlog Music
  * Version: 1.3.2
  * Author: BuddyDev
  * Author URI: https://buddydev.com/members/sbrajesh/
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * BuddyBlog main class
  */
-class BuddyBlogPhotos {
+class BuddyBlogMusic {
 
 	/**
 	 * Singleton instance
@@ -90,8 +90,8 @@ class BuddyBlogPhotos {
 	 * Setup constants.
 	 */
 	private function setup_constants() {
-		if ( ! defined( 'BUDDYBLOGPHOTOS_ARCHIVE_SLUG' ) ) {
-			define( 'BUDDYBLOGPHOTOS_ARCHIVE_SLUG', 'my-photos' );
+		if ( ! defined( 'BUDDYBLOGMUSIC_ARCHIVE_SLUG' ) ) {
+			define( 'BUDDYBLOGMUSIC_ARCHIVE_SLUG', 'my-music' );
 		}
 	}
 	/**
@@ -99,7 +99,7 @@ class BuddyBlogPhotos {
 	 */
 	public function load() {
 		$files = array(
-			'buddyblogphotos-loader.php',
+			'buddyblogmusic-loader.php',
 		);
 
 		if ( is_admin() && ! defined( 'DOING_AJAX' ) ) {
@@ -115,14 +115,14 @@ class BuddyBlogPhotos {
 	 * Load translation files
 	 */
 	public function load_textdomain() {
-		load_plugin_textdomain( 'buddyblogphotos', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+		load_plugin_textdomain( 'buddyblogmusic', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 	}
 
 	/**
 	 * Load comment js on singular posts.
 	 */
 	public function load_comment_js() {
-		if ( bp_is_current_component( 'buddyblogphotos' ) && bp_is_current_action( 'my-photos' ) ) {
+		if ( bp_is_current_component( 'buddyblogmusic' ) && bp_is_current_action( 'my-music' ) ) {
 			wp_enqueue_script( 'comment-reply' );
 		}
 	}
@@ -132,8 +132,8 @@ class BuddyBlogPhotos {
 	 */
 	public function install() {
 		$default = array(
-			//'root_slug'		=> 'photos',
-			'post_type'             => 'photo',
+			//'root_slug'		=> 'music',
+			'post_type'             => 'audio',
 			'post_status'           => 'publish',
 			'comment_status'        => 'open',
 			'show_comment_option'   => 1,
@@ -156,8 +156,8 @@ class BuddyBlogPhotos {
 			'max_upload_count'      => 2,
 		);
 
-		if ( ! get_site_option( 'buddyblogphotos-settings' ) ) {
-			add_site_option( 'buddyblogphotos-settings', $default );
+		if ( ! get_site_option( 'buddyblogmusic-settings' ) ) {
+			add_site_option( 'buddyblogmusic-settings', $default );
 		}
 
 	}
@@ -195,9 +195,9 @@ class BuddyBlogPhotos {
  *
  * @return BuddyBlog
  */
-function buddyblogphotos() {
-	return BuddyBlogPhotos::get_instance();
+function buddyblogmusic() {
+	return BuddyBlogMusic::get_instance();
 }
 
 // Instantiate.
-buddyblogphotos();
+buddyblogmusic();
