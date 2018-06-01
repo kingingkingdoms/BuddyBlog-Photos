@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * BuddyBlog Component
  */
-class BuddyBlogVideos_Core_Component extends BP_Component {
+class BuddyBlogPhotos_Core_Component extends BP_Component {
 
 	/**
 	 * Initialize component
@@ -21,8 +21,8 @@ class BuddyBlogVideos_Core_Component extends BP_Component {
 	public function __construct() {
 
 		parent::start(
-			'buddyblogvideos',
-			__( 'BuddyBlog Videos', 'buddyblogvideos' ),
+			'buddyblogphotos',
+			__( 'BuddyBlog Photos', 'buddyblogphotos' ),
 			untrailingslashit( plugin_dir_path( __FILE__ ) )
 		);
 
@@ -38,14 +38,14 @@ class BuddyBlogVideos_Core_Component extends BP_Component {
 	 */
 	public function includes( $includes = array() ) {
 		$includes = array(
-			'core/buddyblogvideos-templates.php',
-			'core/buddyblogvideos-actions.php',
-			'core/buddyblogvideos-screens.php',
-			'core/buddyblogvideos-functions.php',
-			'core/buddyblogvideos-notifications.php',
-			'core/buddyblogvideos-hooks.php',
-			'core/buddyblogvideos-filters.php',
-			'core/buddyblogvideos-permissions.php',
+			'core/buddyblogphotos-templates.php',
+			'core/buddyblogphotos-actions.php',
+			'core/buddyblogphotos-screens.php',
+			'core/buddyblogphotos-functions.php',
+			'core/buddyblogphotos-notifications.php',
+			'core/buddyblogphotos-hooks.php',
+			'core/buddyblogphotos-filters.php',
+			'core/buddyblogphotos-permissions.php',
 		);
 
 		parent::includes( $includes );
@@ -57,16 +57,16 @@ class BuddyBlogVideos_Core_Component extends BP_Component {
 	public function setup_globals( $globals = array() ) {
 
 		// Define a slug, if necessary.
-		if ( ! defined( 'BP_BUDDYBLOGVIDEOS_SLUG' ) ) {
-			define( 'BP_BUDDYBLOGVIDEOS_SLUG', $this->id );
+		if ( ! defined( 'BP_BUDDYBLOGPHOTOS_SLUG' ) ) {
+			define( 'BP_BUDDYBLOGPHOTOS_SLUG', $this->id );
 		}
 
 		$globals = array(
-			'slug'                  => BP_BUDDYBLOGVIDEOS_SLUG,
-			'root_slug'             => BP_BUDDYBLOGVIDEOS_SLUG,
+			'slug'                  => BP_BUDDYBLOGPHOTOS_SLUG,
+			'root_slug'             => BP_BUDDYBLOGPHOTOS_SLUG,
 			'has_directory'         => false,
-			'notification_callback' => 'buddyblogvideos_format_notifications',
-			'search_string'         => __( 'Search Posts...', 'buddyblogvideos' ),
+			'notification_callback' => 'buddyblogphotos_format_notifications',
+			'search_string'         => __( 'Search Posts...', 'buddyblogphotos' ),
 			'global_tables'         => array(),
 		);
 
@@ -85,26 +85,26 @@ class BuddyBlogVideos_Core_Component extends BP_Component {
 		// Define local variables.
 		$sub_nav = array();
 		// instance of the blog screen.
-		$screen  = BuddyBlogVideos_Screens::get_instance();
+		$screen  = BuddyBlogPhotos_Screens::get_instance();
 
 		$total_posts = 0;
 
 		if ( bp_is_my_profile() ) {
-			$total_posts = buddyblogvideos_get_total_posted( bp_displayed_user_id() );
+			$total_posts = buddyblogphotos_get_total_posted( bp_displayed_user_id() );
 
 		} else {
-			$total_posts = buddyblogvideos_get_total_published_posts( bp_displayed_user_id() );
+			$total_posts = buddyblogphotos_get_total_published_posts( bp_displayed_user_id() );
 		}
 
-		$total_posts = apply_filters( 'buddyblogvideos_visible_posts_count', $total_posts, bp_displayed_user_id() );
+		$total_posts = apply_filters( 'buddyblogphotos_visible_posts_count', $total_posts, bp_displayed_user_id() );
 
 		// Add 'Blog' to the main navigation.
 		$main_nav = array(
-			'name'                => sprintf( __( 'Videos <span>%d</span>', 'buddyblogvideos' ), $total_posts ),
+			'name'                => sprintf( __( 'Photos <span>%d</span>', 'buddyblogphotos' ), $total_posts ),
 			'slug'                => $this->slug,
 			'position'            => 70,
-			'screen_function'     => array( $screen, 'my_videos' ),
-			'default_subnav_slug' => BUDDYBLOGVIDEOS_ARCHIVE_SLUG,
+			'screen_function'     => array( $screen, 'my_photos' ),
+			'default_subnav_slug' => BUDDYBLOGPHOTOS_ARCHIVE_SLUG,
 			'item_css_id'         => $this->id,
 		);
 
@@ -115,17 +115,17 @@ class BuddyBlogVideos_Core_Component extends BP_Component {
 			$blog_link = trailingslashit( bp_loggedin_user_domain() . $this->slug );
 		}
 		// Add the Group Invites nav item.
-		$sub_nav['my-videos'] = array(
-			'name'            => __( 'Posts', 'buddyblogvideos' ),
-			'slug'            => BUDDYBLOGVIDEOS_ARCHIVE_SLUG,
+		$sub_nav['my-photos'] = array(
+			'name'            => __( 'Posts', 'buddyblogphotos' ),
+			'slug'            => BUDDYBLOGPHOTOS_ARCHIVE_SLUG,
 			'parent_url'      => $blog_link,
 			'parent_slug'     => $this->slug,
-			'screen_function' => array( $screen, 'my_videos' ),
+			'screen_function' => array( $screen, 'my_photos' ),
 			'position'        => 30,
 		);
 
 		$sub_nav['new-post'] = array(
-			'name'            => __( 'New Post', 'buddyblogvideos' ),
+			'name'            => __( 'New Post', 'buddyblogphotos' ),
 			'slug'            => 'edit',
 			'parent_url'      => $blog_link,
 			'parent_slug'     => $this->slug,
@@ -134,8 +134,8 @@ class BuddyBlogVideos_Core_Component extends BP_Component {
 			'position'        => 30,
 		);
 
-		$main_nav = apply_filters( 'buddyblogvideos_setup_main_nav', $main_nav );
-		$sub_nav  = apply_filters( 'buddyblogvideos_setup_sub_nav', $sub_nav );
+		$main_nav = apply_filters( 'buddyblogphotos_setup_main_nav', $main_nav );
+		$sub_nav  = apply_filters( 'buddyblogphotos_setup_sub_nav', $sub_nav );
 
 		parent::setup_nav( $main_nav, $sub_nav );
 	}
@@ -157,7 +157,7 @@ class BuddyBlogVideos_Core_Component extends BP_Component {
 			$user_domain = bp_loggedin_user_domain();
 			$blog_link   = trailingslashit( $user_domain . $this->slug );
 
-			$title = __( 'Posts', 'buddyblogvideos' );
+			$title = __( 'Posts', 'buddyblogphotos' );
 			// My Posts.
 			$wp_admin_nav['posts'] = array(
 				'parent' => $bp->my_account_menu_id,
@@ -166,10 +166,10 @@ class BuddyBlogVideos_Core_Component extends BP_Component {
 				'href'   => trailingslashit( $blog_link ),
 			);
 
-			$wp_admin_nav['my-videos'] = array(
+			$wp_admin_nav['my-photos'] = array(
 				'parent'   => 'my-account-' . $this->id,
-				'id'       => 'my-account-' . $this->id . '-my-videos',
-				'title'    => __( 'My Posts', 'buddyblogvideos' ),
+				'id'       => 'my-account-' . $this->id . '-my-photos',
+				'title'    => __( 'My Posts', 'buddyblogphotos' ),
 				'href'     => trailingslashit( $blog_link ),
 				'position' => 10,
 			);
@@ -178,14 +178,14 @@ class BuddyBlogVideos_Core_Component extends BP_Component {
 			$wp_admin_nav['new-post'] = array(
 				'parent'   => 'my-account-' . $this->id,
 				'id'       => 'my-account-' . $this->id . '-new-post',
-				'title'    => __( 'New Post', 'buddyblogvideos' ),
+				'title'    => __( 'New Post', 'buddyblogphotos' ),
 				'href'     => trailingslashit( $blog_link . 'edit' ),
 				'position' => 20,
 			);
 
 		}
 
-		$wp_admin_nav = apply_filters( 'buddyblogvideos_adminbar_nav', $wp_admin_nav );
+		$wp_admin_nav = apply_filters( 'buddyblogphotos_adminbar_nav', $wp_admin_nav );
 		parent::setup_admin_bar( $wp_admin_nav );
 	}
 
@@ -198,18 +198,18 @@ class BuddyBlogVideos_Core_Component extends BP_Component {
 
 		$bp = buddypress();
 
-		if ( bp_is_buddyblogvideos_component() ) {
+		if ( bp_is_buddyblogphotos_component() ) {
 
 			if ( bp_is_my_profile() && ! bp_is_single_item() ) {
 
-				$bp->bp_options_title = __( 'Posts', 'buddyblogvideos' );
+				$bp->bp_options_title = __( 'Posts', 'buddyblogphotos' );
 
 			} elseif ( ! bp_is_my_profile() && ! bp_is_single_item() ) {
 
 				$bp->bp_options_avatar = bp_core_fetch_avatar( array(
 					'item_id' => bp_displayed_user_id(),
 					'type'    => 'thumb',
-					'alt'     => sprintf( __( 'Profile picture of %s', 'buddyblogvideos' ), bp_get_displayed_user_fullname() ),
+					'alt'     => sprintf( __( 'Profile picture of %s', 'buddyblogphotos' ), bp_get_displayed_user_fullname() ),
 				) );
 
 				$bp->bp_options_title = bp_get_displayed_user_fullname();
@@ -227,8 +227,8 @@ class BuddyBlogVideos_Core_Component extends BP_Component {
 /**
  * Setup BuddyBlog component.
  */
-function bp_setup_buddyblogvideos() {
-	buddypress()->buddyblogvideos = new BuddyBlogVideos_Core_Component();
+function bp_setup_buddyblogphotos() {
+	buddypress()->buddyblogphotos = new BuddyBlogPhotos_Core_Component();
 }
 
-add_action( 'bp_loaded', 'bp_setup_buddyblogvideos' );
+add_action( 'bp_loaded', 'bp_setup_buddyblogphotos' );
