@@ -1,4 +1,4 @@
-<?php if ( buddyblogvideos_user_has_posted() ): ?>
+<?php if ( buddyblogphotos_user_has_posted() ): ?>
 <?php
     if ( bp_is_my_profile() || is_super_admin() ) {
         $status = 'any';
