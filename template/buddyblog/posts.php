@@ -53,7 +53,7 @@
 
                     <?php endif;?>
 
-                    <h2 class="posttitle"> <a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', 'buddyblogvideos' ); ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a> </h2>
+                    <h2 class="posttitle"> <a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', 'buddyblogphotos' ); ?> <?php the_title_attribute(); ?>"><?php the_title(); ?></a> </h2>
 
                     <p class="date"><?php printf( __( '%1$s <span>in %2$s</span>', 'buddyblogphotos' ), get_the_date(), get_the_category_list( ', ' ) ); ?></p>
 
