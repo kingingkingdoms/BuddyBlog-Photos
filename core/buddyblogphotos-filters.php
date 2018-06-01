@@ -230,7 +230,7 @@ function buddyblogmusic_add_user_can_edit_cap( $allcaps, $cap, $args ) {
 	// give author some permissions
 }
 
-add_filter( 'user_has_cap', 'buddyblogphotos_add_user_can_edit_cap', 0, 3 );
+add_filter( 'user_has_cap', 'buddyblogmusic_add_user_can_edit_cap', 0, 3 );
 
 /**
  * Should we limit user by no. of posts he has made?
