@@ -163,7 +163,7 @@ class BuddyBlogPhotos_Admin_Settings_Helper {
 			array(
 				'name'    => 'show_posts_on_profile',
 				'label'   => __( 'Show single posts on user profile?', 'buddyblogphotos' ),
-				'desc'    => __( 'If you enable it, the permalink to single post will be something like http://yoursite.com/members/username/buddyblogarticles/postname.', 'buddyblogarticles' ),
+				'desc'    => __( 'If you enable it, the permalink to single post will be something like http://yoursite.com/members/username/buddyblogphotos/postname.', 'buddyblogphotos' ),
 				'type'    => 'radio',
 				'default' => 0,
 				'options' => array(
