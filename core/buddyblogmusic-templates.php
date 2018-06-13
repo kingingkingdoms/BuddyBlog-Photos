@@ -20,15 +20,15 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @param string $template template name.
  */
-function buddyblogmusic_load_template( $template ) {
+function buddyblogarticles_load_template( $template ) {
 
-	$template_dir = apply_filters( 'buddyblog_template_dir', 'buddyblogmusic' );
+	$template_dir = apply_filters( 'buddyblog_template_dir', 'buddyblogarticles' );
 
 	// check for buddyblog/template-file.php in the child theme's dir and then in parent's.
 	$located = locate_template( array( $template_dir . '/' . $template ), false );
 
 	if ( ! $located ) {
-		$located = buddyblogmusic()->get_path() . 'template/buddyblog/' . $template;
+		$located = buddyblogarticles()->get_path() . 'template/buddyblog/' . $template;
 	}
 
 	if ( is_readable( $located ) ) {
@@ -43,7 +43,7 @@ function buddyblogmusic_load_template( $template ) {
  *
  * @return string
  */
-function buddyblogmusic_get_post_url( $post_id ) {
+function buddyblogarticles_get_post_url( $post_id ) {
 
 	$bp = buddypress();
 
@@ -51,11 +51,11 @@ function buddyblogmusic_get_post_url( $post_id ) {
 
 	$post = get_post( $post_id );
 
-	if ( get_post_type( $post ) != buddyblogmusic_get_posttype() ) {
+	if ( get_post_type( $post ) != buddyblogarticles_get_posttype() ) {
 		return get_permalink( $post_id );
 	}
 
-	if ( buddyblogmusic_use_slug_in_permalink() ) {
+	if ( buddyblogarticles_use_slug_in_permalink() ) {
 
 		$id_or_slug = $post->post_name;
 
@@ -64,7 +64,7 @@ function buddyblogmusic_get_post_url( $post_id ) {
 		$id_or_slug = $post->ID;
 	}
 
-	return bp_core_get_user_domain( $post->post_author ) . $bp->buddyblogmusic->slug . '/' . BUDDYBLOGMUSIC_ARCHIVE_SLUG . '/' . $id_or_slug . '/';
+	return bp_core_get_user_domain( $post->post_author ) . $bp->buddyblogarticles->slug . '/' . BUDDYBLOGARTICLES_ARCHIVE_SLUG . '/' . $id_or_slug . '/';
 }
 
 /**
@@ -74,7 +74,7 @@ function buddyblogmusic_get_post_url( $post_id ) {
  *
  * @return string
  */
-function buddyblogmusic_get_edit_url( $post_id = 0 ) {
+function buddyblogarticles_get_edit_url( $post_id = 0 ) {
 
 	$bp = buddypress();
 
@@ -91,7 +91,7 @@ function buddyblogmusic_get_edit_url( $post_id = 0 ) {
 	$post = get_post( $post_id );
 
 	// if the author of the post is same as the loggedin user or the logged in user is admin.
-	if ( $post->post_type != buddyblogmusic_get_posttype() ) {
+	if ( $post->post_type != buddyblogarticles_get_posttype() ) {
 		return '';
 	}
 
@@ -101,12 +101,12 @@ function buddyblogmusic_get_edit_url( $post_id = 0 ) {
 
 	$action_name = 'edit';
 
-	if ( current_user_can( buddyblogmusic_get_option( 'dashboard_edit_cap' ) ) ) {
+	if ( current_user_can( buddyblogarticles_get_option( 'dashboard_edit_cap' ) ) ) {
 		return get_edit_post_link( $post );
 	}
 
 	// if we are here, we can allow user to edit the post.
-	return bp_core_get_user_domain( $post->post_author ) . $bp->buddyblogmusic->slug . "/{$action_name}/" . $post->ID . '/';
+	return bp_core_get_user_domain( $post->post_author ) . $bp->buddyblogarticles->slug . "/{$action_name}/" . $post->ID . '/';
 }
 
 /**
@@ -117,17 +117,17 @@ function buddyblogmusic_get_edit_url( $post_id = 0 ) {
  *
  * @return string
  */
-function buddyblogmusic_get_edit_link( $id = 0, $label = '' ) {
+function buddyblogarticles_get_edit_link( $id = 0, $label = '' ) {
 
-	if ( ! buddyblogmusic_get_option( 'allow_edit' ) ) {
+	if ( ! buddyblogarticles_get_option( 'allow_edit' ) ) {
 		return '';
 	}
 
 	if ( empty( $label ) ) {
-		$label = __( 'Edit', 'buddyblogmusic' );
+		$label = __( 'Edit', 'buddyblogarticles' );
 	}
 
-	$url = buddyblogmusic_get_edit_url( $id );
+	$url = buddyblogarticles_get_edit_url( $id );
 
 	if ( ! $url ) {
 		return '';
@@ -144,14 +144,14 @@ function buddyblogmusic_get_edit_link( $id = 0, $label = '' ) {
  *
  * @return string
  */
-function buddyblogmusic_get_delete_link( $id = 0, $label = '' ) {
+function buddyblogarticles_get_delete_link( $id = 0, $label = '' ) {
 
-	if ( ! buddyblogmusic_user_can_delete( $id, get_current_user_id() ) ) {
+	if ( ! buddyblogarticles_user_can_delete( $id, get_current_user_id() ) ) {
 		return '';
 	}
 
 	if ( empty( $label ) ) {
-		$label = __( 'Delete', 'buddyblogmusic' );
+		$label = __( 'Delete', 'buddyblogarticles' );
 	}
 
 	$bp = buddypress();
@@ -160,7 +160,7 @@ function buddyblogmusic_get_delete_link( $id = 0, $label = '' ) {
 
 	$action_name = 'delete';
 
-	$url = bp_core_get_user_domain( $post->post_author ) . $bp->buddyblogmusic->slug . "/{$action_name}/" . $post->ID . '/';
+	$url = bp_core_get_user_domain( $post->post_author ) . $bp->buddyblogarticles->slug . "/{$action_name}/" . $post->ID . '/';
 
 	return "<a href='{$url}' class='confirm' >{$label}</a>";
 
@@ -171,7 +171,7 @@ function buddyblogmusic_get_delete_link( $id = 0, $label = '' ) {
  *
  * @return string
  */
-function buddyblogmusic_get_new_url() {
+function buddyblogarticles_get_new_url() {
 
 	$bp = buddypress();
 
@@ -182,7 +182,7 @@ function buddyblogmusic_get_new_url() {
 	}
 
 	// if we are here, we can allow user to edit the post.
-	return bp_core_get_user_domain( $user_id ) . $bp->buddyblogmusic->slug . '/edit/';
+	return bp_core_get_user_domain( $user_id ) . $bp->buddyblogarticles->slug . '/edit/';
 }
 
 /**
@@ -192,9 +192,9 @@ function buddyblogmusic_get_new_url() {
  *
  * @return string Link to the single post
  */
-function buddyblogmusic_get_single_url( $post_id = 0 ) {
+function buddyblogarticles_get_single_url( $post_id = 0 ) {
 
-	if ( ! buddyblogmusic_is_single_post() ) {
+	if ( ! buddyblogarticles_is_single_post() ) {
 		return false;
 	}
 
@@ -214,7 +214,7 @@ function buddyblogmusic_get_single_url( $post_id = 0 ) {
  *
  * @global WP_Query $wp_query
  */
-function buddyblogmusic_paginate() {
+function buddyblogarticles_paginate() {
 
 	// get total number of pages.
 	global $wp_query;
@@ -231,9 +231,9 @@ function buddyblogmusic_paginate() {
 		$perma_struct = get_option( 'permalink_structure' );
 
 		$format = empty( $perma_struct ) ? '&page=%#%' : 'page/%#%/';
-		$base   = trailingslashit( buddyblogmusic_get_home_url() . BUDDYBLOGMUSIC_ARCHIVE_SLUG );
+		$base   = trailingslashit( buddyblogarticles_get_home_url() . BUDDYBLOGARTICLES_ARCHIVE_SLUG );
 
-		if ( bp_is_buddyblogmusic_component() ) {
+		if ( bp_is_buddyblogarticles_component() ) {
 			//$base = $base.'/';
 		}
 
