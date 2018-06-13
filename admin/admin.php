@@ -15,7 +15,7 @@ require_once dirname( __FILE__ ) . '/options-buddy/ob-loader.php';
 /**
  * Class BuddyBlog_Admin_Settings_Helper
  */
-class BuddyBlogArticles_Admin_Settings_Helper {
+class BuddyBlogPhotos_Admin_Settings_Helper {
 	/**
 	 * Holds optionsbuddy settings page object
 	 *
@@ -29,7 +29,7 @@ class BuddyBlogArticles_Admin_Settings_Helper {
 	public function __construct() {
 
 		// Create a options page.
-		$this->page = new OptionsBuddy_Settings_Page( 'buddyblogarticles-settings' );
+		$this->page = new OptionsBuddy_Settings_Page( 'buddyblogphotos-settings' );
 		$this->page->set_bp_mode(); // Make it to use bp_get_option/bp_update_option.
 
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
@@ -45,7 +45,7 @@ class BuddyBlogArticles_Admin_Settings_Helper {
 		$page = $this->page;
 		// Add_section
 		// You can pass section_id, section_title, section_description, the section id must be unique for this page, section descriptiopn is optional.
-		$page->add_section( 'basic_section', __( 'Settings', 'buddyblogarticles' ), __( 'Settings for BuddyBlogArticles.', 'buddyblogarticles' ) );
+		$page->add_section( 'basic_section', __( 'Settings', 'buddyblogphotos' ), __( 'Settings for BuddyBlogPhotos.', 'buddyblogphotos' ) );
 
 		$post_types = get_post_types( array(
 			'public' => true,
@@ -59,16 +59,16 @@ class BuddyBlogArticles_Admin_Settings_Helper {
 		}
 
 		$post_statuses = array(
-			'publish' => __( 'Published', 'buddyblogarticles' ),
-			'draft'   => __( 'Draft', 'buddyblogarticles' ),
+			'publish' => __( 'Published', 'buddyblogphotos' ),
+			'draft'   => __( 'Draft', 'buddyblogphotos' ),
 		);
 
 		$comment_statuses = array(
-			'open'  => __( 'Open', 'buddyblogarticles' ),
-			'close' => __( 'Closed', 'buddyblogarticles' ),
+			'open'  => __( 'Open', 'buddyblogphotos' ),
+			'close' => __( 'Closed', 'buddyblogphotos' ),
 		);
 
-		$default_post_type = buddyblogarticles_get_posttype() ? buddyblogarticles_get_posttype() : 'post';
+		$default_post_type = buddyblogphotos_get_posttype() ? buddyblogphotos_get_posttype() : 'post';
 		$taxonomies        = get_object_taxonomies( $default_post_type );
 
 		if ( isset( $taxonomies['post_format'] ) ) {
@@ -86,42 +86,42 @@ class BuddyBlogArticles_Admin_Settings_Helper {
 		$page->get_section( 'basic_section' )->add_fields( array( // Remember, we registered basic section earlier.
 			array(
 				'name'    => 'post_type',
-				'label'   => __( 'Blog Post Type', 'buddyblogarticles' ),
-				'desc'    => __( 'Set the post type for user blog.', 'buddyblogarticles' ),
+				'label'   => __( 'Blog Post Type', 'buddyblogphotos' ),
+				'desc'    => __( 'Set the post type for user blog.', 'buddyblogphotos' ),
 				'type'    => 'select',
 				'default' => $default_post_type,
 				'options' => $post_type_options,
 			),
 			array(
 				'name'    => 'post_status',
-				'label'   => __( 'Default post status', 'buddyblogarticles' ),
-				'desc'    => __( 'What should be the post status when user submits the form?', 'buddyblogarticles' ),
+				'label'   => __( 'Default post status', 'buddyblogphotos' ),
+				'desc'    => __( 'What should be the post status when user submits the form?', 'buddyblogphotos' ),
 				'type'    => 'select',
 				'default' => 'publish',
 				'options' => $post_statuses,
 			),
 			array(
 				'name'    => 'allow_upload',
-				'label'   => __( 'Allow Upload?', 'buddyblogarticles' ),
-				'desc'    => __( 'Want to allow user to upload?', 'buddyblogarticles' ),
+				'label'   => __( 'Allow Upload?', 'buddyblogphotos' ),
+				'desc'    => __( 'Want to allow user to upload?', 'buddyblogphotos' ),
 				'type'    => 'select',
 				'default' => 1,
 				'options' => array(
-					1 => __( 'Yes', 'buddyblogarticles' ),
-					0 => __( 'No', 'buddyblogarticles' ),
+					1 => __( 'Yes', 'buddyblogphotos' ),
+					0 => __( 'No', 'buddyblogphotos' ),
 				),
 			),
 			array(
 				'name'    => 'comment_status',
-				'label'   => __( 'Comment status?', 'buddyblogarticles' ),
-				'desc'    => __( 'Do you want to allow commenting on user posts?', 'buddyblogarticles' ),
+				'label'   => __( 'Comment status?', 'buddyblogphotos' ),
+				'desc'    => __( 'Do you want to allow commenting on user posts?', 'buddyblogphotos' ),
 				'type'    => 'select',
 				'default' => 'open',
 				'options' => $comment_statuses,
 			),
 			array(
 				'name'    => 'show_comment_option',
-				'label'   => __( 'Allow post author to enable/disable comment?', 'buddyblogarticles' ),
+				'label'   => __( 'Allow post author to enable/disable comment?', 'buddyblogphotos' ),
 				'desc'    => __( 'If you enable, A user will be able to change the comment status for his/her post.', 'buddyblogarticles' ),
 				'type'    => 'radio',
 				'default' => 1,
