@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * BuddyBlog Component
  */
-class BuddyBlogMusic_Core_Component extends BP_Component {
+class BuddyBlogArticles_Core_Component extends BP_Component {
 
 	/**
 	 * Initialize component
@@ -21,8 +21,8 @@ class BuddyBlogMusic_Core_Component extends BP_Component {
 	public function __construct() {
 
 		parent::start(
-			'buddyblogmusic',
-			__( 'BuddyBlog Music', 'buddyblogmusic' ),
+			'buddyblogarticles',
+			__( 'BuddyBlog Articles', 'buddyblogarticles' ),
 			untrailingslashit( plugin_dir_path( __FILE__ ) )
 		);
 
@@ -38,14 +38,14 @@ class BuddyBlogMusic_Core_Component extends BP_Component {
 	 */
 	public function includes( $includes = array() ) {
 		$includes = array(
-			'core/buddyblogmusic-templates.php',
-			'core/buddyblogmusic-actions.php',
-			'core/buddyblogmusic-screens.php',
-			'core/buddyblogmusic-functions.php',
-			'core/buddyblogmusic-notifications.php',
-			'core/buddyblogmusic-hooks.php',
-			'core/buddyblogmusic-filters.php',
-			'core/buddyblogmusic-permissions.php',
+			'core/buddyblogarticles-templates.php',
+			'core/buddyblogarticles-actions.php',
+			'core/buddyblogarticles-screens.php',
+			'core/buddyblogarticles-functions.php',
+			'core/buddyblogarticles-notifications.php',
+			'core/buddyblogarticles-hooks.php',
+			'core/buddyblogarticles-filters.php',
+			'core/buddyblogarticles-permissions.php',
 		);
 
 		parent::includes( $includes );
@@ -57,16 +57,16 @@ class BuddyBlogMusic_Core_Component extends BP_Component {
 	public function setup_globals( $globals = array() ) {
 
 		// Define a slug, if necessary.
-		if ( ! defined( 'BP_BUDDYBLOGMUSIC_SLUG' ) ) {
-			define( 'BP_BUDDYBLOGMUSIC_SLUG', $this->id );
+		if ( ! defined( 'BP_BUDDYBLOGARTICLES_SLUG' ) ) {
+			define( 'BP_BUDDYBLOGARTICLES_SLUG', $this->id );
 		}
 
 		$globals = array(
-			'slug'                  => BP_BUDDYBLOGMUSIC_SLUG,
-			'root_slug'             => BP_BUDDYBLOGMUSIC_SLUG,
+			'slug'                  => BP_BUDDYBLOGARTICLES_SLUG,
+			'root_slug'             => BP_BUDDYBLOGARTICLES_SLUG,
 			'has_directory'         => false,
-			'notification_callback' => 'buddyblogmusic_format_notifications',
-			'search_string'         => __( 'Search Posts...', 'buddyblogmusic' ),
+			'notification_callback' => 'buddyblogarticles_format_notifications',
+			'search_string'         => __( 'Search Posts...', 'buddyblogarticles' ),
 			'global_tables'         => array(),
 		);
 
@@ -85,26 +85,26 @@ class BuddyBlogMusic_Core_Component extends BP_Component {
 		// Define local variables.
 		$sub_nav = array();
 		// instance of the blog screen.
-		$screen  = BuddyBlogMusic_Screens::get_instance();
+		$screen  = BuddyBlogArticles_Screens::get_instance();
 
 		$total_posts = 0;
 
 		if ( bp_is_my_profile() ) {
-			$total_posts = buddyblogmusic_get_total_posted( bp_displayed_user_id() );
+			$total_posts = buddyblogarticles_get_total_posted( bp_displayed_user_id() );
 
 		} else {
-			$total_posts = buddyblogmusic_get_total_published_posts( bp_displayed_user_id() );
+			$total_posts = buddyblogarticles_get_total_published_posts( bp_displayed_user_id() );
 		}
 
-		$total_posts = apply_filters( 'buddyblogmusic_visible_posts_count', $total_posts, bp_displayed_user_id() );
+		$total_posts = apply_filters( 'buddyblogarticles_visible_posts_count', $total_posts, bp_displayed_user_id() );
 
 		// Add 'Blog' to the main navigation.
 		$main_nav = array(
-			'name'                => sprintf( __( 'Music <span>%d</span>', 'buddyblogmusic' ), $total_posts ),
+			'name'                => sprintf( __( 'Articles <span>%d</span>', 'buddyblogarticles' ), $total_posts ),
 			'slug'                => $this->slug,
 			'position'            => 70,
-			'screen_function'     => array( $screen, 'my_music' ),
-			'default_subnav_slug' => BUDDYBLOGMUSIC_ARCHIVE_SLUG,
+			'screen_function'     => array( $screen, 'my_articles' ),
+			'default_subnav_slug' => BUDDYBLOGARTICLES_ARCHIVE_SLUG,
 			'item_css_id'         => $this->id,
 		);
 
@@ -115,17 +115,17 @@ class BuddyBlogMusic_Core_Component extends BP_Component {
 			$blog_link = trailingslashit( bp_loggedin_user_domain() . $this->slug );
 		}
 		// Add the Group Invites nav item.
-		$sub_nav['my-music'] = array(
-			'name'            => __( 'Posts', 'buddyblogmusic' ),
-			'slug'            => BUDDYBLOGMUSIC_ARCHIVE_SLUG,
+		$sub_nav['my-articles'] = array(
+			'name'            => __( 'Posts', 'buddyblogarticles' ),
+			'slug'            => BUDDYBLOGARTICLES_ARCHIVE_SLUG,
 			'parent_url'      => $blog_link,
 			'parent_slug'     => $this->slug,
-			'screen_function' => array( $screen, 'my_music' ),
+			'screen_function' => array( $screen, 'my_articles' ),
 			'position'        => 30,
 		);
 
 		$sub_nav['new-post'] = array(
-			'name'            => __( 'New Post', 'buddyblogmusic' ),
+			'name'            => __( 'New Post', 'buddyblogarticles' ),
 			'slug'            => 'edit',
 			'parent_url'      => $blog_link,
 			'parent_slug'     => $this->slug,
@@ -134,8 +134,8 @@ class BuddyBlogMusic_Core_Component extends BP_Component {
 			'position'        => 30,
 		);
 
-		$main_nav = apply_filters( 'buddyblogmusic_setup_main_nav', $main_nav );
-		$sub_nav  = apply_filters( 'buddyblogmusic_setup_sub_nav', $sub_nav );
+		$main_nav = apply_filters( 'buddyblogarticles_setup_main_nav', $main_nav );
+		$sub_nav  = apply_filters( 'buddyblogarticles_setup_sub_nav', $sub_nav );
 
 		parent::setup_nav( $main_nav, $sub_nav );
 	}
@@ -157,7 +157,7 @@ class BuddyBlogMusic_Core_Component extends BP_Component {
 			$user_domain = bp_loggedin_user_domain();
 			$blog_link   = trailingslashit( $user_domain . $this->slug );
 
-			$title = __( 'Posts', 'buddyblogmusic' );
+			$title = __( 'Posts', 'buddyblogarticles' );
 			// My Posts.
 			$wp_admin_nav['posts'] = array(
 				'parent' => $bp->my_account_menu_id,
@@ -166,10 +166,10 @@ class BuddyBlogMusic_Core_Component extends BP_Component {
 				'href'   => trailingslashit( $blog_link ),
 			);
 
-			$wp_admin_nav['my-music'] = array(
+			$wp_admin_nav['my-articles'] = array(
 				'parent'   => 'my-account-' . $this->id,
-				'id'       => 'my-account-' . $this->id . '-my-music',
-				'title'    => __( 'My Posts', 'buddyblogmusic' ),
+				'id'       => 'my-account-' . $this->id . '-my-articles',
+				'title'    => __( 'My Posts', 'buddyblogarticles' ),
 				'href'     => trailingslashit( $blog_link ),
 				'position' => 10,
 			);
@@ -178,14 +178,14 @@ class BuddyBlogMusic_Core_Component extends BP_Component {
 			$wp_admin_nav['new-post'] = array(
 				'parent'   => 'my-account-' . $this->id,
 				'id'       => 'my-account-' . $this->id . '-new-post',
-				'title'    => __( 'New Post', 'buddyblogmusic' ),
+				'title'    => __( 'New Post', 'buddyblogarticles' ),
 				'href'     => trailingslashit( $blog_link . 'edit' ),
 				'position' => 20,
 			);
 
 		}
 
-		$wp_admin_nav = apply_filters( 'buddyblogmusic_adminbar_nav', $wp_admin_nav );
+		$wp_admin_nav = apply_filters( 'buddyblogarticles_adminbar_nav', $wp_admin_nav );
 		parent::setup_admin_bar( $wp_admin_nav );
 	}
 
@@ -198,18 +198,18 @@ class BuddyBlogMusic_Core_Component extends BP_Component {
 
 		$bp = buddypress();
 
-		if ( bp_is_buddyblogmusic_component() ) {
+		if ( bp_is_buddyblogarticles_component() ) {
 
 			if ( bp_is_my_profile() && ! bp_is_single_item() ) {
 
-				$bp->bp_options_title = __( 'Posts', 'buddyblogmusic' );
+				$bp->bp_options_title = __( 'Posts', 'buddyblogarticles' );
 
 			} elseif ( ! bp_is_my_profile() && ! bp_is_single_item() ) {
 
 				$bp->bp_options_avatar = bp_core_fetch_avatar( array(
 					'item_id' => bp_displayed_user_id(),
 					'type'    => 'thumb',
-					'alt'     => sprintf( __( 'Profile picture of %s', 'buddyblogmusic' ), bp_get_displayed_user_fullname() ),
+					'alt'     => sprintf( __( 'Profile picture of %s', 'buddyblogarticles' ), bp_get_displayed_user_fullname() ),
 				) );
 
 				$bp->bp_options_title = bp_get_displayed_user_fullname();
@@ -227,8 +227,8 @@ class BuddyBlogMusic_Core_Component extends BP_Component {
 /**
  * Setup BuddyBlog component.
  */
-function bp_setup_buddyblogmusic() {
-	buddypress()->buddyblogmusic = new BuddyBlogMusic_Core_Component();
+function bp_setup_buddyblogarticles() {
+	buddypress()->buddyblogarticles = new BuddyBlogArticles_Core_Component();
 }
 
-add_action( 'bp_loaded', 'bp_setup_buddyblogmusic' );
+add_action( 'bp_loaded', 'bp_setup_buddyblogarticles' );
