@@ -122,130 +122,130 @@ class BuddyBlogPhotos_Admin_Settings_Helper {
 			array(
 				'name'    => 'show_comment_option',
 				'label'   => __( 'Allow post author to enable/disable comment?', 'buddyblogphotos' ),
-				'desc'    => __( 'If you enable, A user will be able to change the comment status for his/her post.', 'buddyblogarticles' ),
+				'desc'    => __( 'If you enable, A user will be able to change the comment status for his/her post.', 'buddyblogphotos' ),
 				'type'    => 'radio',
 				'default' => 1,
 				'options' => array(
-					1 => __( 'Yes', 'buddyblogarticles' ),
-					0 => __( 'No', 'buddyblogarticles' ),
+					1 => __( 'Yes', 'buddyblogphotos' ),
+					0 => __( 'No', 'buddyblogphotos' ),
 				),
 			),
 			array(
 				'name'    => 'post_update_redirect',
-				'label'   => __( 'Where to redirect after creating/updating post?', 'buddyblogarticles' ),
-				'desc'    => __( 'If you select archive, user will be redirected to the post list, if single, user will be redirected to single post page if the post is published.', 'buddyblogarticles' ),
+				'label'   => __( 'Where to redirect after creating/updating post?', 'buddyblogphotos' ),
+				'desc'    => __( 'If you select archive, user will be redirected to the post list, if single, user will be redirected to single post page if the post is published.', 'buddyblogphotos' ),
 				'type'    => 'select',
 				'default' => 'archive',
 				'options' => array(
-					'archive' => __( 'Archive page', 'buddyblogarticles' ),
-					'single'  => __( 'Single post page', 'buddyblogarticles' ),
+					'archive' => __( 'Archive page', 'buddyblogphotos' ),
+					'single'  => __( 'Single post page', 'buddyblogphotos' ),
 				),
 			),
 			array(
 				'name'    => 'enable_taxonomy',
-				'label'   => __( 'Enable Taxonomy?', 'buddyblogarticles' ),
-				'desc'    => __( 'If you enable, users will be able to select terms from the selected taxonomies.', 'buddyblogarticles' ),
+				'label'   => __( 'Enable Taxonomy?', 'buddyblogphotos' ),
+				'desc'    => __( 'If you enable, users will be able to select terms from the selected taxonomies.', 'buddyblogphotos' ),
 				'type'    => 'radio',
 				'default' => 1,
 				'options' => array(
-					1 => __( 'Yes', 'buddyblogarticles' ),
-					0 => __( 'No', 'buddyblogarticles' ),
+					1 => __( 'Yes', 'buddyblogphotos' ),
+					0 => __( 'No', 'buddyblogphotos' ),
 				),
 			),
 			array(
 				'name'    => 'allowed_taxonomies',
-				'label'   => __( 'Select allowed taxonomies', 'buddyblogarticles' ),
-				'desc'    => __( 'Please check the taxonomies you want users to be able to attach to their post.', 'buddyblogarticles' ),
+				'label'   => __( 'Select allowed taxonomies', 'buddyblogphotos' ),
+				'desc'    => __( 'Please check the taxonomies you want users to be able to attach to their post.', 'buddyblogphotos' ),
 				'type'    => 'multicheck',
 				'default' => 'category',
 				'options' => $tax,
 			),
 			array(
 				'name'    => 'show_posts_on_profile',
-				'label'   => __( 'Show single posts on user profile?', 'buddyblogarticles' ),
+				'label'   => __( 'Show single posts on user profile?', 'buddyblogphotos' ),
 				'desc'    => __( 'If you enable it, the permalink to single post will be something like http://yoursite.com/members/username/buddyblogarticles/postname.', 'buddyblogarticles' ),
 				'type'    => 'radio',
 				'default' => 0,
 				'options' => array(
-					1 => __( 'Yes', 'buddyblogarticles' ),
-					0 => __( 'No', 'buddyblogarticles' ),
+					1 => __( 'Yes', 'buddyblogphotos' ),
+					0 => __( 'No', 'buddyblogphotos' ),
 				),
 			),
 			array(
 				'name'    => 'limit_no_of_posts',
-				'label'   => __( 'Limit number of posts a user can create?', 'buddyblogarticles' ),
-				'desc'    => __( 'If you enable it, You can control the allowed number of posts from the next option.', 'buddyblogarticles' ),
+				'label'   => __( 'Limit number of posts a user can create?', 'buddyblogphotos' ),
+				'desc'    => __( 'If you enable it, You can control the allowed number of posts from the next option.', 'buddyblogphotos' ),
 				'type'    => 'radio',
 				'default' => 0,
 				'options' => array(
-					1 => __( 'Yes', 'buddyblogarticles' ),
-					0 => __( 'No', 'buddyblogarticles' ),
+					1 => __( 'Yes', 'buddyblogphotos' ),
+					0 => __( 'No', 'buddyblogphotos' ),
 				),
 			),
 			array(
 				'name'    => 'max_allowed_posts',
-				'label'   => __( 'How many posts a user can create?', 'buddyblogarticles' ),
-				'desc'    => __( 'Only applies if you have enabled the limit on posts from above option.', 'buddyblogarticles' ),
+				'label'   => __( 'How many posts a user can create?', 'buddyblogphotos' ),
+				'desc'    => __( 'Only applies if you have enabled the limit on posts from above option.', 'buddyblogphotos' ),
 				'type'    => 'text',
 				'default' => 10,
 			),
 			array(
 				'name'    => 'publish_cap',
-				'label'   => __( 'Which capability is required for pusblishing?', 'buddyblogarticles' ),
-				'desc'    => __( 'Please check for https://codex.wordpress.org/Roles_and_Capabilities allowed capabilities.', 'buddyblogarticles' ),
+				'label'   => __( 'Which capability is required for pusblishing?', 'buddyblogphotos' ),
+				'desc'    => __( 'Please check for https://codex.wordpress.org/Roles_and_Capabilities allowed capabilities.', 'buddyblogphotos' ),
 				'type'    => 'text',
 				'default' => 'read',
 			),
 			array(
 				'name'    => 'allow_unpublishing',
-				'label'   => __( 'Allow users to unpublish their own post?', 'buddyblogarticles' ),
+				'label'   => __( 'Allow users to unpublish their own post?', 'buddyblogphotos' ),
 				'desc'    => '',
 				'type'    => 'radio',
 				'default' => 0,
 				'options' => array(
-					1 => __( 'Yes', 'buddyblogarticles' ),
-					0 => __( 'No', 'buddyblogarticles' ),
+					1 => __( 'Yes', 'buddyblogphotos' ),
+					0 => __( 'No', 'buddyblogphotos' ),
 				),
 			),
 			array(
 				'name'    => 'post_cap',
-				'label'   => __( 'Which capability is required for creating post?', 'buddyblogarticles' ),
-				'desc'    => __( 'Please check for https://codex.wordpress.org/Roles_and_Capabilities allowed capabilities.', 'buddyblogarticles' ),
+				'label'   => __( 'Which capability is required for creating post?', 'buddyblogphotos' ),
+				'desc'    => __( 'Please check for https://codex.wordpress.org/Roles_and_Capabilities allowed capabilities.', 'buddyblogphotos' ),
 				'type'    => 'text',
 				'default' => 'read',
 			),
 			array(
 				'name'    => 'allow_edit',
-				'label'   => __( 'Allow user to edit their post?', 'buddyblogarticles' ),
-				'desc'    => __( 'if you disable it, user will not be able to edit their own post.', 'buddyblogarticles' ),
+				'label'   => __( 'Allow user to edit their post?', 'buddyblogphotos' ),
+				'desc'    => __( 'if you disable it, user will not be able to edit their own post.', 'buddyblogphotos' ),
 				'type'    => 'radio',
 				'default' => 1,
 				'options' => array(
-					1 => __( 'Yes', 'buddyblogarticles' ),
-					0 => __( 'No', 'buddyblogarticles' ),
+					1 => __( 'Yes', 'buddyblogphotos' ),
+					0 => __( 'No', 'buddyblogphotos' ),
 				),
 			),
 			array(
 				'name'    => 'dashboard_edit_cap',
-				'label'   => __( 'Which capability can edit post in backend(WordPress Dashboard)?', 'buddyblogarticles' ),
-				'desc'    => __( 'User with these capabilities will nto be redirected to front end editor for editing post., user will not be able to edit their own post.', 'buddyblogarticles' ),
+				'label'   => __( 'Which capability can edit post in backend(WordPress Dashboard)?', 'buddyblogphotos' ),
+				'desc'    => __( 'User with these capabilities will nto be redirected to front end editor for editing post., user will not be able to edit their own post.', 'buddyblogphotos' ),
 				'type'    => 'text',
 				'default' => 'publish_posts',
 			),
 			array(
 				'name'    => 'allow_delete',
-				'label'   => __( 'Allow user to delete their post?', 'buddyblogarticles' ),
-				'desc'    => __( 'if you disable it, user will not be able to delete their own post.', 'buddyblogarticles' ),
+				'label'   => __( 'Allow user to delete their post?', 'buddyblogphotos' ),
+				'desc'    => __( 'if you disable it, user will not be able to delete their own post.', 'buddyblogphotos' ),
 				'type'    => 'radio',
 				'default' => 1,
 				'options' => array(
-					1 => __( 'Yes', 'buddyblogarticles' ),
-					0 => __( 'No', 'buddyblogarticles' ),
+					1 => __( 'Yes', 'buddyblogphotos' ),
+					0 => __( 'No', 'buddyblogphotos' ),
 				),
 			),
 		) );
 
-		do_action( 'buddyblogarticles_admin_register_settings', $page );
+		do_action( 'buddyblogphotos_admin_register_settings', $page );
 
 		$page->init();
 	}
@@ -254,7 +254,7 @@ class BuddyBlogPhotos_Admin_Settings_Helper {
 	 * Add option page
 	 */
 	public function admin_menu() {
-		add_options_page( __( 'BuddyBlogArticles Settings', 'buddyblogarticles' ), __( 'BuddyBlog Articles', 'buddyblogarticles' ), 'manage_options', 'buddyblogarticles', array(
+		add_options_page( __( 'BuddyBlogPhotos Settings', 'buddyblogphotos' ), __( 'BuddyBlog Photos', 'buddyblogphotos' ), 'manage_options', 'buddyblogphotos', array(
 			$this->page,
 			'render',
 		) );
@@ -266,7 +266,7 @@ class BuddyBlogPhotos_Admin_Settings_Helper {
 	 */
 	public function admin_css() {
 
-		if ( ! isset( $_GET['page'] ) || $_GET['page'] != 'buddyblogarticles' ) {
+		if ( ! isset( $_GET['page'] ) || $_GET['page'] != 'buddyblogphotos' ) {
 			return;
 		}
 
@@ -276,4 +276,4 @@ class BuddyBlogPhotos_Admin_Settings_Helper {
 	}
 }
 
-new BuddyBlogArticles_Admin_Settings_Helper();
+new BuddyBlogPhotos_Admin_Settings_Helper();
