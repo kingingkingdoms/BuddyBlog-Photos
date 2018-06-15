@@ -66,7 +66,7 @@ class BuddyBlogPhotos_Core_Component extends BP_Component {
 			'root_slug'             => BP_BUDDYBLOGPHOTOS_SLUG,
 			'has_directory'         => false,
 			'notification_callback' => 'buddyblogphotos_format_notifications',
-			'search_string'         => __( 'Search Posts...', 'buddyblogphotos' ),
+			'search_string'         => __( 'Search Photos...', 'buddyblogphotos' ),
 			'global_tables'         => array(),
 		);
 
@@ -124,12 +124,12 @@ class BuddyBlogPhotos_Core_Component extends BP_Component {
 			'position'        => 30,
 		);
 
-		$sub_nav['new-post'] = array(
-			'name'            => __( 'New Post', 'buddyblogphotos' ),
+		$sub_nav['new-photo'] = array(
+			'name'            => __( 'New Photo', 'buddyblogphotos' ),
 			'slug'            => 'edit',
 			'parent_url'      => $blog_link,
 			'parent_slug'     => $this->slug,
-			'screen_function' => array( $screen, 'new_post' ),
+			'screen_function' => array( $screen, 'new_photo' ),
 			'user_has_access' => bp_is_my_profile(),
 			'position'        => 30,
 		);
@@ -157,9 +157,9 @@ class BuddyBlogPhotos_Core_Component extends BP_Component {
 			$user_domain = bp_loggedin_user_domain();
 			$blog_link   = trailingslashit( $user_domain . $this->slug );
 
-			$title = __( 'Posts', 'buddyblogphotos' );
+			$title = __( 'Photos', 'buddyblogphotos' );
 			// My Posts.
-			$wp_admin_nav['posts'] = array(
+			$wp_admin_nav['photos'] = array(
 				'parent' => $bp->my_account_menu_id,
 				'id'     => 'my-account-' . $this->id,
 				'title'  => $title,
@@ -169,16 +169,16 @@ class BuddyBlogPhotos_Core_Component extends BP_Component {
 			$wp_admin_nav['my-photos'] = array(
 				'parent'   => 'my-account-' . $this->id,
 				'id'       => 'my-account-' . $this->id . '-my-photos',
-				'title'    => __( 'My Posts', 'buddyblogphotos' ),
+				'title'    => __( 'All Photos', 'buddyblogphotos' ),
 				'href'     => trailingslashit( $blog_link ),
 				'position' => 10,
 			);
 
 			// Add new Posts.
-			$wp_admin_nav['new-post'] = array(
+			$wp_admin_nav['new-photo'] = array(
 				'parent'   => 'my-account-' . $this->id,
-				'id'       => 'my-account-' . $this->id . '-new-post',
-				'title'    => __( 'New Post', 'buddyblogphotos' ),
+				'id'       => 'my-account-' . $this->id . '-new-photo',
+				'title'    => __( 'New Photo', 'buddyblogphotos' ),
 				'href'     => trailingslashit( $blog_link . 'edit' ),
 				'position' => 20,
 			);
@@ -202,7 +202,7 @@ class BuddyBlogPhotos_Core_Component extends BP_Component {
 
 			if ( bp_is_my_profile() && ! bp_is_single_item() ) {
 
-				$bp->bp_options_title = __( 'Posts', 'buddyblogphotos' );
+				$bp->bp_options_title = __( 'Photos', 'buddyblogphotos' );
 
 			} elseif ( ! bp_is_my_profile() && ! bp_is_single_item() ) {
 
