@@ -116,7 +116,7 @@ class BuddyBlogPhotos_Core_Component extends BP_Component {
 		}
 		// Add the Group Invites nav item.
 		$sub_nav['my-photos'] = array(
-			'name'            => __( 'Photos', 'buddyblogphotos' ),
+			'name'            => __( 'All Photos', 'buddyblogphotos' ),
 			'slug'            => BUDDYBLOGPHOTOS_ARCHIVE_SLUG,
 			'parent_url'      => $blog_link,
 			'parent_slug'     => $this->slug,
