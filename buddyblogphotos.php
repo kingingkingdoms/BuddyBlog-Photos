@@ -2,10 +2,10 @@
 /**
  * Plugin Name: BuddyBlog Photos
  * Version: 1.3.2
- * Author: BuddyDev
- * Author URI: https://buddydev.com/members/sbrajesh/
- * Plugin URI: https://buddydev.com/plugins/buddyblog/
- * Description: Allow users to post/edit/manage blog posts from their BuddyPress profile
+ * Author: K&L
+ * Author URI: https://millionairedigest.com/members/kl/
+ * Plugin URI: https://millionairedigest.com/
+ * Description: Add a BuddyPress profile nav tab called "Photos" to user's profiles for giving our users the ability to display all of the photos they've taken.
  *
  * @package buddyblog
  */
