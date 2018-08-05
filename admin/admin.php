@@ -254,7 +254,7 @@ class BuddyBlogPhotos_Admin_Settings_Helper {
 	 * Add option page
 	 */
 	public function admin_menu() {
-		add_options_page( __( 'BuddyBlogPhotos Settings', 'buddyblogphotos' ), __( 'BuddyBlog Photos', 'buddyblogphotos' ), 'manage_options', 'buddyblogphotos', array(
+		add_options_page( __( 'BuddyBlogPhotos Settings', 'buddyblogphotos' ), __( 'Profile Photos', 'buddyblogphotos' ), 'manage_options', 'buddyblogphotos', array(
 			$this->page,
 			'render',
 		) );
